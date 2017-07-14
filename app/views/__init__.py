@@ -3,6 +3,6 @@
 
 from flask import Blueprint
 
-app = Blueprint("view", __name__)
+app = Blueprint("main", __name__)
 
 from . import view, error
