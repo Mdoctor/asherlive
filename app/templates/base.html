@@ -7,15 +7,15 @@
 </head>
 {% block navbar %}
 <nav class="navbar navbar-inverse navbar-static-top">
+    {% set navigation_bar = [ ('/', 'index', 'Home'), ('/python/', 'python', 'Python'), ('/ruby/', 'ruby', 'Ruby') ] -%} {% set active_page = active_page|default('index') -%}
     <div class="container">
         <ul class="nav navbar-nav">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">Python</a></li>
-            <li role="presentation"><a href="#">Ruby</a></li>
+            {% for href, id, caption in navigation_bar %}
+            <li{% if id==active_page %} class="active" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a></li> {% endfor %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
             {% if not session.logged_in %}
-            <li><a href="#">Sign in</a></li>
+            <li><a href={{url_for('main.login')}}>Sign in</a></li>
             {% else %}
             <li><a href="#">Sign out</a></li>
             <li class="dropdown">
