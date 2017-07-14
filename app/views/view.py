@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # coding:utf-8
 
+
 from flask import request, render_template, \
     flash, redirect, url_for, make_response
 from . import app
@@ -17,7 +18,3 @@ def index1():
 @app.route('/ruby/')
 def index2():
     return render_template('index.html')
-
-@app.route('/login/')
-def login():
-    return render_template('login.html')

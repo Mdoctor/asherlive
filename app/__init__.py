@@ -33,7 +33,11 @@ def create_app(config_name):
     login_manager.init_app(app)
     pagedown.init_app(app)
     # 附加路由和自定义的错误页面
+
     from .views import app as app_blueprint
     app.register_blueprint(app_blueprint)
 
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    
     return app
