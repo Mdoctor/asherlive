@@ -1,6 +1,38 @@
-{% extends "base.html" %}
-{% block container %}
-<div>
-    <h1>Hello, World!</h1>
-</div>
+{% extends "base.html" %} {% block container %}
+<ul class="row media-list">
+    <li class="col-md-9 col-md-offset-2">
+        <div class="col-md-2">
+            <a href="#">
+                <img class="img-thumbnail" src={{url_for( 'static', filename='topic.jpg' , _external=True)}} alt="#@todo">
+            </a>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">test1</h3>
+                </div>
+                <div class="panel-body">
+                    有人朝九晚五，有人行迹四方； 有人结婚生子，有人独自成长。 在这世间说不尽道不完的种种生活里，每个人都活出了一个仅属自己的人生。 面对这形形色色的活法，有人拿起了相机，有人则拿起纸笔。 他们用镜头，用手帐，记录下了自己和他人的万种人生。 5月13日下午三点，方所重庆店，跟随他们的脚步，来了解如何通过摄影去记录他人生活中令人回味的瞬间，又如何通过手帐来记录自己小日子里有意思的每刻。 与此同时，我们还将了解到，兴趣如何帮助有想法、有灵感的你，更好地表达和记录人生的喜怒哀乐、酸甜苦辣。
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="col-md-9 col-md-offset-2">
+        <div class="col-md-2">
+            <a href="#">
+                <img class="img-thumbnail" src={{url_for( 'static', filename='topic.jpg' , _external=True)}} alt="#@todo">
+            </a>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">test1</h3>
+                </div>
+                <div class="panel-body">
+                    有人朝九晚五，有人行迹四方； 有人结婚生子，有人独自成长。 在这世间说不尽道不完的种种生活里，每个人都活出了一个仅属自己的人生。 面对这形形色色的活法，有人拿起了相机，有人则拿起纸笔。 他们用镜头，用手帐，记录下了自己和他人的万种人生。 5月13日下午三点，方所重庆店，跟随他们的脚步，来了解如何通过摄影去记录他人生活中令人回味的瞬间，又如何通过手帐来记录自己小日子里有意思的每刻。 与此同时，我们还将了解到，兴趣如何帮助有想法、有灵感的你，更好地表达和记录人生的喜怒哀乐、酸甜苦辣。
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
 {% endblock %}
