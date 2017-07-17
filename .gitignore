@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+migrations/README
+migrations/alembic.ini
+migrations/env.py
+migrations/script.py.mako
