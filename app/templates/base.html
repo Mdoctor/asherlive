@@ -11,7 +11,7 @@
     <div class="container">
         <ul class="nav navbar-nav">
             {% for href, id, caption in navigation_bar %}
-            <li{% if id==active_page %} class="active" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a></li> {% endfor %}
+            <li{% if id==active_page %} class="active" {% endif %}><a class="navbar-brand" href="{{ href|e }}">{{ caption|e }}</a></li> {% endfor %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
             {% if not session.logged_in %}
