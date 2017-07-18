@@ -43,6 +43,7 @@ def index2():
 
 
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
+@login_required
 def posts(id):
     post = Post.query.get_or_404(id)
     form = CommentForm()
@@ -67,6 +68,7 @@ def posts(id):
 
 
 @app.route('/post/', methods=['GET', 'POST'])
+@login_required
 def post():
     form = PostForm()
     if form.validate_on_submit():
