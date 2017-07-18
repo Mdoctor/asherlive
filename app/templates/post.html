@@ -5,10 +5,15 @@
 {% block title %}Post{% endblock %}
 
 {% block content %}
-<div class="page-header col-md-8 col-md-offset-2">
-    <h4 id="comments">Comments</h4>
+<div class="col-md-8 col-md-offset-2">
+    <div class="page-header ">
+        <h4 id="comments">Comments</h4>
+    </div>
     <div class="col-md-8">
         {{ wtf.quick_form(form) }}
     </div>
 </div>
+{% block scripts %}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
 {% endblock %}
