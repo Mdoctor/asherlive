@@ -33,10 +33,17 @@ class Config:
 class TestingConfig(Config):
     """docstring for TestingConfig"""
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://asher:Svc_2017~!@localhost/app_blog"
+
+
+class PrdConfig(Config):
+    """docstring for TestingConfig"""
+    TESTING = True
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:Svc_2015!@@rm-uf6lzwt5nol0s6quq.mysql.rds.aliyuncs.com/app_blog"
 
 
 config = {
     "testing": TestingConfig,
+    "PrdConfig": PrdConfig,
     "default": TestingConfig
 }
