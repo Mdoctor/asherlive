@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-10 col-md-offset-1">
 	<form method="post" {% if id %} action="{{url_for('.edit',id=id)}}" {% else %} action="{{url_for('.post')}} {% endif %}">
 		{{ form.hidden_tag() }}
 		<div class="form-group">
