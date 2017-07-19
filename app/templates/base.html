@@ -2,15 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> {% block title %} asherlive {% endblock %}
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{ message }}
-    </div>
-    {% endfor %}
-</head>
+{% block title %} asherlive {% endblock %}
 
 {% block navbar %}
 <nav class="navbar navbar-inverse navbar-static-top">
@@ -40,12 +32,18 @@
 </nav>
 {% endblock %}
 
-{% block content %}
+
 <div class="row">
     <div class="container-fluid">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             {{ message }}
+           </div>
+        {% endfor %}
+        {% block content %}
         <div class="col-md-9">
             {% block container %} {% endblock %}
-
         </div>
         <div class="col-md-3">
             <div class="list-group">
@@ -54,7 +52,8 @@
                     <a href="#" class="list-group-item" >关注</a>
             </div>
         </div>
+        {% endblock %}
     </div>
 </div>
-{% endblock %}
+
 </html>
