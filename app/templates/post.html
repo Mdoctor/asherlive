@@ -3,17 +3,33 @@
 
 
 {% block title %}Post{% endblock %}
-
+<link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
 {% block content %}
-<div class="col-md-8 col-md-offset-2">
-    <div class="page-header ">
-        <h4 id="comments">Comments</h4>
+    <div class="col-md-8 col-md-offset-2">
+	<form method="post" action="{{url_for("main.post")}}">
+		{{ form.hidden_tag() }}
+		<div class="form-group">
+		{{ form.title.label }} {{ form.title(class_='form-control') }}
+		</div>
+		<div class="form-group">
+		{{ form.body.label }}
+			<div id="editormd" class="form-control">
+                		{{ form.body(style="display:none;") }}
+                	</div>
+	        </div>
+		<input class="btn btn-primary" type="submit" value="Submit">
+        </form>
     </div>
-    <div class="col-md-8">
-        {{ wtf.quick_form(form) }}
-    </div>
-</div>
-{% block scripts %}
-{{ pagedown.include_pagedown() }}
-{% endblock %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+<script type="text/javascript">
+    $(function () {
+        var Editor = editormd("editormd", {
+            //width: "100%",
+           // height: "100%",
+            //syncScrolling: "single",
+            path: "{{ url_for('static',filename='editormd/lib/') }}"
+        });
+    });
+</script>
 {% endblock %}
