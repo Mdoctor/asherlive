@@ -3,7 +3,7 @@
 
 
 from flask import request, render_template, \
-    flash, current_app, redirect, url_for, make_response
+    flash, current_app, abort, redirect, url_for, make_response
 from . import app
 from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
@@ -48,8 +48,7 @@ def posts(id):
     post = Post.query.get_or_404(id)
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(title=form.title.data,
-                          body=form.body.data,
+        comment = Comment(body=form.body.data,
                           post=post,
                           author=current_user._get_current_object())
         db.session.add(comment)
@@ -63,7 +62,7 @@ def posts(id):
         page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
         error_out=False)
     comments = pagination.items
-    return render_template('post.html', posts=[post], form=form,
+    return render_template('article.html', posts=[post], form=form,
                            comments=comments, pagination=pagination)
 
 
@@ -77,4 +76,21 @@ def post():
                     author=current_user._get_current_object())
         db.session.add(post)
         return redirect(url_for('.index'))
+    return render_template('post.html', form=form)
+
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    post = Post.query.get_or_404(id)
+    if current_user != post.author:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.body = form.body.data
+        db.session.add(post)
+        flash('The post has been updated.')
+        return redirect(url_for('.post', id=post.id))
+    form.title.data = post.title
+    form.body.data = post.body
     return render_template('post.html', form=form)
