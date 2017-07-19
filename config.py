@@ -45,5 +45,5 @@ class PrdConfig(Config):
 config = {
     "testing": TestingConfig,
     "PrdConfig": PrdConfig,
-    "default": PrdConfig
+    "default": TestingConfig
 }

@@ -34,7 +34,7 @@ def create_app(config_name):
     pagedown.init_app(app)
     # 附加路由和自定义的错误页面
 
-    from .views import app as app_blueprint
+    from .views import main as app_blueprint
     app.register_blueprint(app_blueprint)
 
     from .auth import auth as auth_blueprint

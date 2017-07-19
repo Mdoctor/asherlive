@@ -10,7 +10,7 @@
 
 {% block page_content %}
     <div class="col-md-8 col-md-offset-2">
-	<form method="post" action="{{url_for("main.post")}}">
+	<form method="post" {% if id %} action="{{url_for('.edit',id=id)}}" {% else %} action="{{url_for('.post')}} {% endif %}">
 		{{ form.hidden_tag() }}
 		<div class="form-group">
 		{{ form.title.label }} {{ form.title(class_='form-control') }}
@@ -21,7 +21,8 @@
                 		{{ form.body(style="display:none;") }}
             </div>
 	     </div>
-		<input class="btn btn-primary" type="submit" value="Submit">
+		<input class="btn btn-primary" type="submit" value="提交">
+		<a class="btn btn-danger" type="button"  href="javascript:history.go(-1);">取消</a>
     </form>
     </div>
 {% endblock %}

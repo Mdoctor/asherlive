@@ -55,11 +55,11 @@ class EditProfileAdminForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    title = StringField("title", validators=[Required()])
-    body = TextAreaField("What's on your mind?", validators=[Required()])
-    submit = SubmitField('Submit')
+    title = StringField("标题", validators=[Required()])
+    body = TextAreaField("内容", validators=[Required()])
+    submit = SubmitField('提交')
 
 
 class CommentForm(FlaskForm):
-    body = StringField('Enter your comment', validators=[Required()])
-    submit = SubmitField('Submit')
+    body = StringField('回复', validators=[Required()])
+    submit = SubmitField('提交')
