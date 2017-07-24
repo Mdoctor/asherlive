@@ -44,7 +44,6 @@ def index2():
 
 
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
-@login_required
 def article(id):
     post = Post.query.get_or_404(id)
     form = CommentForm()
@@ -97,6 +96,14 @@ def edit(id):
     form.body.data = post.body
     return render_template('post.html', form=form,id=id)
 
+@main.route('/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete(id):
+    post = Post.query.get_or_404(id)
+    if current_user != post.author:
+        return redirect(url_for('.index'))
+    db.session.delete(post)
+    return redirect(url_for('.index'))
 
 @main.route('/download/<path:filename>', methods=['POST', 'GET'])
 def downloadfile(filename):
