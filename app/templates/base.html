@@ -6,11 +6,23 @@
 
 {% block navbar %}
 <nav class="navbar navbar-inverse navbar-static-top">
-    {% set navigation_bar = [ ('/', 'index', 'Home'), ('/python/', 'python', 'Python'), ('/ruby/', 'ruby', 'Ruby') ] -%} {% set active_page = active_page|default('index') -%}
+    <div class="container">
+     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+          <a class="navbar-brand" href="{{url_for('main.index')}}">Home</a>
+          <a href="{{url_for('main.post')}}" class="visible-xs-inline-block navbar-brand" >发表文章</a>
+    </div>
+    {% set navigation_bar = [('/python/', 'python', 'Python'), ('/ruby/', 'ruby', 'Ruby') ] -%} {% set active_page = active_page|default('index') -%}
+<div class="collapse navbar-collapse" id="navbar-collapse-1">
     <div class="container">
         <ul class="nav navbar-nav">
             {% for href, id, caption in navigation_bar %}
-            <li {% if id==active_page %} class="active" {% endif %}><a class="navbar-brand" href="{{ href|e }}">{{ caption|e }}</a></li> {% endfor %}
+            <li {% if id==active_page %} class="active" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a></li> {% endfor %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
             {% if not current_user.is_authenticated %}
@@ -29,6 +41,8 @@
             {% endif %}
         </ul>
     </div>
+</div>
+</div>
 </nav>
 {% endblock %}
 
@@ -42,12 +56,12 @@
            </div>
         {% endfor %}
         {% block page_content %}
-        <div class="col-md-9">
+        <div class="col-md-9 col-xs-12">
             {% block container %} {% endblock %}
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 hidden-xs">
             <div class="list-group">
-                    <a href="{{url_for('.post')}}" class="list-group-item" >发表文章</a>
+                    <a href="{{url_for('main.post')}}" class="list-group-item" >发表文章</a>
                     <a href="#" class="list-group-item" >喜欢</a>
                     <a href="#" class="list-group-item" >关注</a>
             </div>
