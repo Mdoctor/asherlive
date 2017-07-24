@@ -18,7 +18,7 @@
 		<div class="form-group">
 		{{ form.body.label }}
 			<div id="editormd" class="form-control">
-                		{{ form.body(style="display:none;") }}
+                	{{ form.body(style="display:none;") }}
             </div>
 	     </div>
 		<input class="btn btn-primary" type="submit" value="提交">
@@ -32,12 +32,18 @@
 <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
 <script type="text/javascript">
     $(function () {
+        if (window.screen.width >= 768) {
         var Editor = editormd("editormd", {
             width: "100%",
             height: 640,
             syncScrolling: "single",
             path: "{{ url_for('static',filename='editormd/lib/') }}"
-        });
+        });}
+        else {
+            $("#editormd").removeClass();
+            $("#body").addClass("form-control");
+            $("#body").show();
+		}
     });
 </script>
 {% endblock %}
