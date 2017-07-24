@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block container %}
+    <div class="list-group">
+    {% for file in listdir %}
+    <a href="{{url_for('.downloadfile',filename=file)}}" class="list-group-item list-group-item-info">{{ file }}</a>
+    {% endfor %}
+    </div>
+{% endblock %}

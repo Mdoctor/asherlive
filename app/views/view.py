@@ -3,7 +3,7 @@
 
 
 from flask import request, render_template, \
-    flash, current_app, abort, redirect, url_for, make_response
+    flash, current_app, abort, redirect, url_for, make_response, send_from_directory
 from . import main
 from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
@@ -12,6 +12,7 @@ from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
 from .. import db
 from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
+import os
 
 
 @main.route('/')
@@ -95,3 +96,17 @@ def edit(id):
     form.title.data = post.title
     form.body.data = post.body
     return render_template('post.html', form=form,id=id)
+
+
+@main.route('/download/<path:filename>', methods=['POST', 'GET'])
+def downloadfile(filename):
+    print(filename)
+    from urllib import parse
+    return send_from_directory("/data/asherlive/app/download/", filename, as_attachment=True,attachment_filename = parse.quote(filename))
+
+
+
+@main.route('/download/')
+def download():
+    listdir = os.listdir("/data/asherlive/app/download/")
+    return render_template("download.html",listdir=listdir)
