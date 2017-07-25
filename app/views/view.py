@@ -32,17 +32,6 @@ def index():
     return render_template('index.html',posts=posts,
                            show_followed=show_followed, pagination=pagination)
 
-
-@main.route('/python/')
-def index1():
-    return render_template('index.html')
-
-
-@main.route('/ruby/')
-def index2():
-    return render_template('index.html')
-
-
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def article(id):
     post = Post.query.get_or_404(id)

@@ -4,30 +4,22 @@
 
 <ul class="row media-list">
     {% for post in posts %}
-    <li class="col-md-9 col-md-offset-2">
-        <div class="col-md-2 col-xs-3">
-            <a href="#">
-                <img class="img-thumbnail" src={{url_for( 'static', filename='default.jpg' , _external=True)}} alt="#@todo">
-            </a>
-        </div>
-        <div class="col-md-10 col-xs-9">
+    <li class="col-md-12">
             <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><a href="{{url_for('.article',id=post.id)}}">{{ post.title }}</a></h3>
-                </div>
                 <div class="panel-body">
+                    <h2 class="panel-title"><a href="{{url_for('.article',id=post.id)}}">{{ post.title }}</a></h2>
+                    <hr>
                     {% if post.body_html %}
-                        {{ post.body_html | safe }}
+                        {{ post.body_html[:100]|markdown|safe }}
                     {% else %}
-                        {{ post.body }}
+                        {{ post.body[:100]|markdown|safe }}
                     {% endif %}
                 </div>
             </div>
-        </div>
     </li>
     {% endfor %}
 </ul>
-{% if pagination.pages > 1 %}
+{% if pagination and pagination.pages > 1 %}
 <nav class="col-md-4 col-md-offset-4">
     <nav aria-label="Page navigation">
         {{ macros.pagination_widget(pagination, '.index') }}
