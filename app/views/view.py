@@ -15,7 +15,6 @@ from ..decorators import admin_required, permission_required
 import os
 import re
 import copy
-import markdown
 
 @main.route('/')
 def index():
@@ -39,7 +38,6 @@ def index():
     for x in posts:
         x.body = replace_body(x.body)
         x.body_html = replace_body(x.body_html)
-
     return render_template('index.html',posts=posts,
                            show_followed=show_followed, pagination=pagination)
 

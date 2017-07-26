@@ -45,5 +45,5 @@ def create_app(config_name):
     @app.template_filter('markdown2html')
     def markdown2html(text):
         return markdown.markdown(text, ['extra'])
-    
+
     return app
