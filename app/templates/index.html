@@ -7,12 +7,13 @@
     <li class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-body">
-                    <h2 class="panel-title"><a href="{{url_for('.article',id=post.id)}}">{{ post.title }}</a></h2>
+                    <h3><strong><a href="{{url_for('.article',id=post.id)}}">{{ post.title }}</a></strong></h3>
+                    <h4><small>发表@{{ post.timestamp }}</small></h4>
                     <hr>
                     {% if post.body_html %}
-                        {{ post.body_html[:100]|markdown|safe }}
+                        {{ post.body_html }}
                     {% else %}
-                        {{ post.body[:100]|markdown|safe }}
+                        {{ post.body }}
                     {% endif %}
                 </div>
             </div>

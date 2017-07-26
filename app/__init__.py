@@ -10,6 +10,7 @@ from flask_mail import Mail
 from flask_login import LoginManager
 from flask_pagedown import PageDown
 from flaskext.markdown import Markdown
+import markdown
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -40,5 +41,9 @@ def create_app(config_name):
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    @app.template_filter('markdown2html')
+    def markdown2html(text):
+        return markdown.markdown(text, ['extra'])
     
     return app

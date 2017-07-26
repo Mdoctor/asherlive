@@ -13,7 +13,9 @@ from .. import db
 from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
 import os
-
+import re
+import copy
+import markdown
 
 @main.route('/')
 def index():
@@ -28,7 +30,16 @@ def index():
     pagination = query.order_by(Post.timestamp.desc()).paginate(
         page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out=False)
-    posts = pagination.items
+    posts = copy.deepcopy(pagination.items)
+
+    def replace_body(body):
+        regex = re.compile("<(?:.|\s)*?>")
+        rest = regex.sub('',body)[:150]
+        return  rest
+    for x in posts:
+        x.body = replace_body(x.body)
+        x.body_html = replace_body(x.body_html)
+
     return render_template('index.html',posts=posts,
                            show_followed=show_followed, pagination=pagination)
 
@@ -106,3 +117,5 @@ def downloadfile(filename):
 def download():
     listdir = os.listdir("/data/asherlive/app/download/")
     return render_template("download.html",listdir=listdir)
+
+

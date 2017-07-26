@@ -3,10 +3,7 @@
 <html>
 
 {% block title %} asherlive {% endblock %}
-{% block head %}
-{{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static',filename='style.css',_external=True) }}" />
-{% endblock %}
+
 {% block navbar %}
 
 <nav class="navbar navbar-inverse navbar-static-top">

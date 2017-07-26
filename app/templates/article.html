@@ -18,9 +18,9 @@
                     </div>
                     <hr>
                     {% if post.body_html %}
-                        {{ post.body_html|markdown|safe}}
+                        {{ post.body_html|markdown2html|safe}}
                     {% else %}
-                        {{ post.body|markdown|safe }}
+                        {{ post.body|markdown2html|safe }}
                     {% endif %}
                 </div>
             </div>
