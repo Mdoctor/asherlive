@@ -40,3 +40,9 @@
 </nav>
 {% endif %}
 {% endblock %}
+{% block scripts %}
+{{ super() }}
+<script>
+    $("table").addClass("table table-hover table-bordered");
+</script>
+{% endblock %}
