@@ -33,7 +33,7 @@
                               <img class="media-object" style="width:42px;height:42px;" src="{{ url_for('static',filename='default.jpg')}}" alt="123">
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{ comment.author.username }}</h4>
+                            <h4 class="media-heading">{{ comment.author.username }}  <small>评论@{{ comment.timestamp }}</small></h4>
                         {% if comment.body_html %}
                             <p>{{ comment.body_html | safe }}</p>
                         {% else %}

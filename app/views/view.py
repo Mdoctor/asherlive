@@ -56,12 +56,15 @@ def article(id):
     post = Post.query.get_or_404(id)
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(body=form.body.data,
+        if current_user.is_authenticated:
+            comment = Comment(body=form.body.data,
                           post=post,
                           author=current_user._get_current_object())
-        db.session.add(comment)
-        flash('Your comment has been published.')
-        return redirect(url_for('.article', id=post.id))
+            db.session.add(comment)
+            flash('Your comment has been published.')
+            return redirect(url_for('.article', id=post.id))
+        else:
+            return redirect(url_for('auth.login', next=url_for('.article', id=post.id)))
     page = request.args.get('page', 1, type=int)
     if page == -1:
         page = (post.comments.count() - 1) // \

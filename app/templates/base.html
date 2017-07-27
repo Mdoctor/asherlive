@@ -3,6 +3,10 @@
 <html>
 
 {% block title %} asherlive {% endblock %}
+{% block head %}
+{{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
 
 {% block navbar %}
 
@@ -61,6 +65,21 @@
         </div>
         {% endblock %}
     </div>
+    {% block footer %}
+        <blockquote class="blockquote-reverse">
+        <hr>
+            <div class="col-md-4 col-md-offset-8">
+                <div>
+                    <h4>about me</h4>
+                    <h5><a href="https://github.com/Mdoctor" target="_blank">github</a></h5>
+                </div>
+            </div>
+        <footer>这个博客使用flask框架，搭建在阿里云服务器</footer>
+        </blockquote>
+    {% endblock %}
 </div>
 {% endblock %}
+
+
+
 </html>
