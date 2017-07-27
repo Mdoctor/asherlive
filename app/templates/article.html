@@ -21,6 +21,16 @@
                     </div>
                     <hr>
                         {{ post.body|markdown2html|markdown|safe }}
+                     <hr>
+                         <div class="col-md-6 col-md-offset-6">
+                            <form id="user-comment" class="form-inline" method="post" >
+            		            {{ form.hidden_tag() }}
+		                        <div class="form-group">
+		                            {{ form.body(class_='form-control',placeholder="发表评论") }}
+		                        </div>
+		                        <input class="btn btn-danger" type="button" onclick="comments();" value="发表评论">
+                            </form>
+                         </div>
                 </div>
             </div>
             <div class="panel panel-danger">
@@ -41,18 +51,10 @@
                         {% endif %}
                         </div>
                     </div>
-            {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
-            <div>
-                <form id="user-comment" class="form-inline" method="post" >
-		            {{ form.hidden_tag() }}
-		            <div class="form-group">
-		            {{ form.body(class_='form-control',placeholder="发表评论") }}
-		            </div>
-		            <input class="btn btn-info" type="button" onclick="comments();" value="发表评论">
-		        </form>
-            </div>
+
 {% endfor %}
 {% if pagination and pagination.pages > 1 %}
 <nav class="col-md-4 col-md-offset-4">
