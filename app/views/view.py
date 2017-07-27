@@ -16,6 +16,16 @@ import os
 import re
 import copy
 
+@main.after_app_request
+def after_request(response):
+    for query in get_debug_queries():
+        if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
+            current_app.logger.warning(
+                'Slow query: %s\nParameters: %s\nDuration: %fs\nContext: %s\n'
+                % (query.statement, query.parameters, query.duration,
+                   query.context))
+    return response
+
 @main.route('/')
 def index():
     page = request.args.get('page', 1, type=int)
@@ -51,7 +61,7 @@ def article(id):
                           author=current_user._get_current_object())
         db.session.add(comment)
         flash('Your comment has been published.')
-        return redirect(url_for('.post', id=post.id, page=-1))
+        return redirect(url_for('.article', id=post.id))
     page = request.args.get('page', 1, type=int)
     if page == -1:
         page = (post.comments.count() - 1) // \
