@@ -21,7 +21,7 @@
       </button>
           <a class="navbar-brand" href="{{url_for('main.index')}}">Asherlive</a>
     </div>
-    {% set navigation_bar = [('/', 'index', '首页'),('#', 'python', '分类'), ('#', 'ruby', '标签') ] -%} {% set active_page = active_page|default('index') -%}
+    {% set navigation_bar = [('/', 'index', '首页'),('#', 'python', '分类'), ('/download/', 'download', '资源下载') ] -%} {% set active_page = active_page|default('index') -%}
 <div class="collapse navbar-collapse" id="navbar-collapse-1">
     <div class="container">
         <ul class="nav navbar-nav navbar-right">

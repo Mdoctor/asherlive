@@ -1,8 +1,15 @@
 {% extends "base.html" %}
+{% set active_page = "download" %}
 {% block container %}
-    <div class="list-group">
-    {% for file in listdir %}
-    <a href="{{url_for('.downloadfile',filename=file)}}" class="list-group-item list-group-item-info">{{ file }}</a>
-    {% endfor %}
-    </div>
+    <table class="table table-hover table-bordered">
+	<thead><tr><th>文档</th><th>操作</th></tr></thead>
+	<tbody>
+	    {% for file in listdir %}
+	<tr>
+		<td>{{ file }}</td>
+		<td><a href="{{url_for('.downloadfile',filename=file)}}" class="btn btn-danger" role="button">下载</a></td>
+	</tr>
+	    {% endfor %}
+	</tbody>
+    </table>
 {% endblock %}

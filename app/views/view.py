@@ -126,7 +126,7 @@ def downloadfile(filename):
 
 @main.route('/download/')
 def download():
-    listdir = os.listdir("/data/asherlive/app/download/")
+    listdir = sorted(os.listdir("/data/asherlive/app/download/"))
     return render_template("download.html",listdir=listdir)
 
 
