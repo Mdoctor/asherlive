@@ -18,6 +18,7 @@ import copy
 
 @main.after_app_request
 def after_request(response):
+    db.session.commit()
     for query in get_debug_queries():
         if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
             current_app.logger.warning(
@@ -25,6 +26,13 @@ def after_request(response):
                 % (query.statement, query.parameters, query.duration,
                    query.context))
     return response
+
+@main.teardown_request
+def dbsession_clean(exception=None):
+    try:
+        db.session.remove()
+    finally:
+        pass
 
 @main.route('/')
 def index():
@@ -48,6 +56,7 @@ def index():
     for x in posts:
         x.body = replace_body(x.body)
         x.body_html = replace_body(x.body_html)
+    print(posts, show_followed, pagination)
     return render_template('index.html',posts=posts,
                            show_followed=show_followed, pagination=pagination)
 
